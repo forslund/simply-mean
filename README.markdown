@@ -17,13 +17,13 @@ to the source file.
 
 Init the mean value object
 
-`
-    mean_t hourMean;
-    int partialMeanValues[60]; // partial mean every minute
-    int samples[60];           // samples every second
-
-	meanInit(hourMean, partialMeanValues, 60, samples, 60);
-`
+    
+        mean_t hourMean;
+        int partialMeanValues[60]; // partial mean every minute
+        int samples[60];           // samples every second
+        
+	    meanInit(hourMean, partialMeanValues, 60, samples, 60);
+    
 
 To add a sample to the mean simply call
 
