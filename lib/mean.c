@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mean.h"
+#include "config.h"
 
-void meanInit(mean_t *mean, signed short *meanArr, 
-			  unsigned char maLen, signed short *sampleArr, 
+void meanInit(mean_t *mean, MEAN_TYPE *meanArr, 
+			  unsigned char maLen, MEAN_TYPE *sampleArr, 
 			  unsigned char saLen)
 {
 	mean->mLen = maLen;
@@ -19,10 +20,10 @@ void meanInit(mean_t *mean, signed short *meanArr,
 }
 
 
-void meanAddSample(mean_t *mean, signed short sample)
+void meanAddSample(mean_t *mean, MEAN_TYPE sample)
 {
 	unsigned char index;
-	signed long subMean = 0;
+	MEAN_L_TYPE subMean = 0;
 
 	mean->s[mean->sPtr] = sample;
 
@@ -34,9 +35,9 @@ void meanAddSample(mean_t *mean, signed short sample)
 		// Calculate sub-mean
 		for (index = 0; index < mean->sLen; index++)
 		{
-			 subMean += (signed long)mean->s[index];
+			 subMean += (MEAN_L_TYPE)mean->s[index];
 		}
-		subMean /= (signed long) mean->sLen;
+		subMean /= (MEAN_L_TYPE) mean->sLen;
 #ifdef DEBUG
 		printf("mean->m[%d] = %d\n", mean->mPtr, subMean);
 #endif // DEBUG
@@ -50,10 +51,10 @@ void meanAddSample(mean_t *mean, signed short sample)
 	}
 }
 
-signed short meanGet(mean_t mean)
+MEAN_TYPE meanGet(mean_t mean)
 {
 	unsigned char index, stop;
-	signed short sum = 0;
+	MEAN_TYPE sum = 0;
 
 	if (mean.status & MEAN_FULL)
 		stop = mean.mLen;
